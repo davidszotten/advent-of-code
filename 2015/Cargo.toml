@@ -1,0 +1,19 @@
+[package]
+name = "aoc2015"
+version = "1.0"
+authors = ["David Szotten <davidszotten@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+anyhow = "*"
+# cached = "*"
+clap = "*"
+# itertools = "*"
+lazy_static = "*"
+# num = "*"
+# permutohedron = "*"
+# pest = "*"
+# pest_derive = "*"
+regex = "*"
+# reduce = "*"
+# md-5 = "*"
