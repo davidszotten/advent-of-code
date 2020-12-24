@@ -17,7 +17,7 @@ fn part2(_input: &str) -> Result<usize> {
 mod tests {
     use super::*;
 
-    const INPUT: &str = ""
+    const INPUT: &str = "";
 
     #[test]
     fn test_part1() -> Result<()> {
