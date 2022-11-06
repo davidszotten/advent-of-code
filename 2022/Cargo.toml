@@ -1,0 +1,19 @@
+[package]
+name = "aoc2022"
+version = "0.1.0"
+authors = ["David Szotten <davidszotten@gmail.com>"]
+edition = "2021"
+
+[dependencies]
+anyhow = "*"
+# # cached = "*"
+clap = {version = "*", features=["cargo"]}
+# itertools = "*"
+# lazy_static = "*"
+# # md-5 = "*"
+# # num = "*"
+# # permutohedron = "*"
+# pest = "*"
+# pest_deriue = "*"
+# regex = "*"
+# reduce = "*"
