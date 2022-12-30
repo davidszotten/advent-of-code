@@ -1,6 +1,6 @@
 use anyhow::{Context, Error, Result};
 use std::fmt;
-use std::ops::{Add, AddAssign, Mul, Sub};
+use std::ops::{Add, AddAssign, Div, Mul, Sub};
 use std::str::FromStr;
 
 #[derive(PartialEq, Eq, Default, Clone, Copy, Hash)]
@@ -57,5 +57,12 @@ impl Mul<i64> for Coor {
     type Output = Self;
     fn mul(self, rhs: i64) -> Self::Output {
         Coor::new(self.x * rhs, self.y * rhs)
+    }
+}
+
+impl Div<i64> for Coor {
+    type Output = Self;
+    fn div(self, rhs: i64) -> Self::Output {
+        Coor::new(self.x / rhs, self.y / rhs)
     }
 }
