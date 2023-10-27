@@ -76,7 +76,11 @@ fn parse_input() -> Result<Args> {
 
 type DayFunc<T> = fn(&str) -> Result<T>;
 
-fn run<S, T>(part1: &DayFunc<S>, part2: &DayFunc<T>) -> Result<String>
+fn format<T: Display>(val: T) -> String {
+    format!("{}", val)
+}
+
+pub fn dispatch<S, T>(part1: DayFunc<S>, part2: DayFunc<T>) -> Result<()>
 where
     S: Display,
     T: Display,
@@ -86,18 +90,10 @@ where
         Source::Stdin => read_stdin(),
         Source::File(filename) => read_file(&filename),
     }?;
-    match args.part {
-        Part::Part1 => part1(&input).map(|res| format!("{}", res)),
-        Part::Part2 => part2(&input).map(|res| format!("{}", res)),
-    }
-}
-
-pub fn dispatch<S, T>(part1: DayFunc<S>, part2: DayFunc<T>) -> Result<()>
-where
-    S: Display,
-    T: Display,
-{
-    let result = run(&part1, &part2)?;
-    println!("{}", result);
+    let result = match args.part {
+        Part::Part1 => part1(&input).map(format),
+        Part::Part2 => part2(&input).map(format),
+    };
+    println!("{}", result?);
     Ok(())
 }
