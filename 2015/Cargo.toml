@@ -7,7 +7,7 @@ edition = "2018"
 [dependencies]
 anyhow = "*"
 # cached = "*"
-clap = "*"
+clap = {version = "*", features=["cargo"]}
 # itertools = "*"
 lazy_static = "*"
 md-5 = "*"
@@ -18,3 +18,4 @@ permutohedron = "*"
 # pest_derive = "*"
 # reduce = "*"
 regex = "*"
+serde_json = "*"
