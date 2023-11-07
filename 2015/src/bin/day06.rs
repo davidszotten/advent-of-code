@@ -35,8 +35,8 @@ impl TryFrom<&str> for Instruction {
             bail!("invalid prefix {}", s)
         };
         let (start_raw, end_raw) = rest.split_once(" through ").context("no through")?;
-        let (start_x_raw, start_y_raw) = start_raw.split_once(",").context("no start comma")?;
-        let (end_x_raw, end_y_raw) = end_raw.split_once(",").context("no end comma")?;
+        let (start_x_raw, start_y_raw) = start_raw.split_once(',').context("no start comma")?;
+        let (end_x_raw, end_y_raw) = end_raw.split_once(',').context("no end comma")?;
         Ok(Instruction {
             action,
             rect: Rect {

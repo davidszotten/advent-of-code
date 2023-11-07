@@ -10,7 +10,7 @@ fn main() -> Result<()> {
 fn part1(input: &str) -> Result<usize> {
     let mut pos = Coor::new(0, 0);
     let mut seen = HashSet::new();
-    seen.insert(pos.clone());
+    seen.insert(pos);
     for c in input.chars() {
         let offset = match c {
             '>' => Coor::new(1, 0),
@@ -20,7 +20,7 @@ fn part1(input: &str) -> Result<usize> {
             _ => bail!("invalid char `{}`", c),
         };
         pos += offset;
-        seen.insert(pos.clone());
+        seen.insert(pos);
     }
     Ok(seen.len())
 }
@@ -31,8 +31,8 @@ fn part2(input: &str) -> Result<usize> {
     let mut turn = true;
     let mut seen1 = HashSet::new();
     let mut seen2 = HashSet::new();
-    seen1.insert(pos1.clone());
-    seen2.insert(pos2.clone());
+    seen1.insert(pos1);
+    seen2.insert(pos2);
     for c in input.chars() {
         let offset = match c {
             '>' => Coor::new(1, 0),
@@ -43,10 +43,10 @@ fn part2(input: &str) -> Result<usize> {
         };
         if turn {
             pos1 += offset;
-            seen1.insert(pos1.clone());
+            seen1.insert(pos1);
         } else {
             pos2 += offset;
-            seen2.insert(pos2.clone());
+            seen2.insert(pos2);
         }
         turn = !turn;
     }

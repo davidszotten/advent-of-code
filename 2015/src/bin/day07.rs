@@ -16,7 +16,7 @@ impl Source {
     fn value(&self, wires: &Wires) -> Option<u16> {
         match self {
             Source::Value(v) => Some(*v),
-            Source::Variable(w) => wires.get(&*w).map(|v| *v),
+            Source::Variable(w) => wires.get(w).copied(),
         }
     }
 }
@@ -48,7 +48,7 @@ struct Op {
 }
 
 fn combine(wires: &Wires, a: &Source, b: &Source, f: fn(u16, u16) -> u16) -> Option<u16> {
-    match (a.value(&wires), b.value(&wires)) {
+    match (a.value(wires), b.value(wires)) {
         (Some(a), Some(b)) => Some(f(a, b)),
         _ => None,
     }
@@ -58,12 +58,12 @@ impl Op {
     fn apply(&self, wires: &Wires) -> Option<u16> {
         use Input::*;
         match &self.input {
-            Direct(s) => s.value(&wires),
-            And(s1, s2) => combine(&wires, &s1, &s2, |s1, s2| s1 & s2),
-            Or(s1, s2) => combine(&wires, &s1, &s2, |s1, s2| s1 | s2),
-            Lshift(s1, s2) => combine(&wires, &s1, &s2, |s1, s2| s1 << s2),
-            Rshift(s1, s2) => combine(&wires, &s1, &s2, |s1, s2| s1 >> s2),
-            Not(s) => s.value(&wires).map(|s| !s),
+            Direct(s) => s.value(wires),
+            And(s1, s2) => combine(wires, s1, s2, |s1, s2| s1 & s2),
+            Or(s1, s2) => combine(wires, s1, s2, |s1, s2| s1 | s2),
+            Lshift(s1, s2) => combine(wires, s1, s2, |s1, s2| s1 << s2),
+            Rshift(s1, s2) => combine(wires, s1, s2, |s1, s2| s1 >> s2),
+            Not(s) => s.value(wires).map(|s| !s),
         }
     }
 }
@@ -129,7 +129,7 @@ fn part2(input: &str) -> Result<u16> {
             Op {
                 input: Input::Direct(_),
                 target: b,
-            } if b == "b".to_string() => Op {
+            } if b == *"b" => Op {
                 input: Input::Direct(Source::Value(new_b)),
                 target: "b".into(),
             },

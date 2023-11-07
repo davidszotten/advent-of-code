@@ -55,7 +55,7 @@ impl TryFrom<&str> for Gift {
 fn parse(input: &str) -> Result<Vec<Gift>> {
     input
         .split('\n')
-        .map(|l| Gift::try_from(l))
+        .map(Gift::try_from)
         .collect::<Result<Vec<_>>>()
 }
 

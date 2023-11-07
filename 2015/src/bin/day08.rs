@@ -8,7 +8,7 @@ fn main() -> Result<()> {
 
 fn count(s: &str) -> usize {
     let mut res = 2; // quotes
-    let mut it = multipeek(s.chars().into_iter());
+    let mut it = multipeek(s.chars());
     while let Some(c) = it.next() {
         if c == '\\' {
             if it.peek() == Some(&'x') {
@@ -20,7 +20,6 @@ fn count(s: &str) -> usize {
                 res += 1;
                 it.next();
             }
-        } else {
         }
     }
     res

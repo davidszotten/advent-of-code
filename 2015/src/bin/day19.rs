@@ -87,7 +87,7 @@ fn parse(input: &str) -> Result<(Vec<Recipe>, &str)> {
     let molecule = sections.next().ok_or(anyhow!("should have 2 sections"))?;
     let recipes = recipes
         .split('\n')
-        .map(|r| Recipe::try_from(r))
+        .map(Recipe::try_from)
         .collect::<Result<Vec<_>>>()?;
     Ok((recipes, molecule))
 }
