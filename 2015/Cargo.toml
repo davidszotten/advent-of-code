@@ -8,7 +8,7 @@ edition = "2018"
 anyhow = "*"
 # cached = "*"
 clap = {version = "*", features=["cargo"]}
-# itertools = "*"
+itertools = "*"
 lazy_static = "*"
 md-5 = "*"
 multipeek = "*"
